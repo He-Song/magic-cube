@@ -1,0 +1,29 @@
+spring:
+  thymeleaf:
+    check-template: true
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    encoding: UTF-8
+    mode: HTML5
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/magic_cube
+    username: magicCube
+    password: magicCube
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    database: DEFAULT
+    show-sql: true
+    generate-ddl: true
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        temp:
+          use_jdbc_metadata_defaults: false

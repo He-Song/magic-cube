@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-dialog.min.js"></script>
+<script type="text/javascript" src="/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="/js/jquery-form.js"></script>
+
+<script src="/js/dataTables.bootstrap.js"></script>
+<script src="/js/bootstrap-table.min.js"></script>
+<!--  <script type="text/javascript" src="/js/index.js"></script>  -->
+<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+<link href="/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+<link rel="stylesheet" type="text/css"
+	href="/css/bootstrap-dialog.min.css">
+
+
+<script type="text/javascript" src="/js/dist/handsontable.full.js"></script>
+<link rel="stylesheet" type="text/css"
+	href="/js/dist/handsontable.full.css">
+
+<!-- 自定义handson样式 -->
+<link rel="stylesheet" type="text/css"
+	href="/css/handsontable_custom.css">
+<title>handsontable</title>
+</head>
+
+<body>
+	<!-- Example Brand Center -->
+	<div class="example-wrap">
+		<div class="example">
+			<nav class="navbar navbar-default" role="navigation"
+				style="margin-bottom: 0px;">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand navbar-brand-center"
+							href="javascript:void(0)"> handsontable </a>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</div>
+	<!-- End Example Brand Center -->
+
+	<!-- panel-body -->
+	<div class="row">
+		<div class="" style="padding-left: 20px;">
+			<div class="box">
+				<header>
+					<div class="row" style="height: 34px; display: none">
+						<div class="btn-group tabel-action-btn">
+							<a class="btn btn-default" title="数据迁移" href="javascript:void(0)"
+								onclick="javascript:dataMigrationShow()" id="levelupBtn">Excel导入</a>
+							<a class="btn btn-default" title="数据回滚" href="javascript:void(0)"
+								onclick="javascript:rollBackShow()" id="levelupBtn"> 导出Excel</a>
+						</div>
+						<div class=" col-lg-3 col-lg-offset-5 col-md-3 col-md-offset-5">
+							<div id="tipsinfo" class="alert alert-success fade collapse"
+								style="margin-bottom: 0px; padding: 6px;">
+								<strong>Well done!</strong>successfully <i
+									class="fa fa-spinner fa-spin"></i>
+							</div>
+						</div>
+
+					</div>
+				</header>
+
+				<div id="example"></div>
+
+
+
+
+				<div id="example2"></div>
+
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<script>
+	
+	$(document).ready(function(){
+		initGrid_dataMigration();
+	});
+
+	function initGrid_dataMigration(){
+		var data = [
+			["", "Ford", "Volvo", "Toyota", "Honda"],
+			["2016", 10, 11, 12, 13],
+			["2017", 20, 11, 14, 13],
+			["2018", 30, 15, 12, 13]
+		];
+		var container = document.getElementById('example');
+		var hot = new Handsontable(container, {
+			data: data,
+			rowHeaders: true,
+			colHeaders: true,
+			
+			minSpareRows:5,//空出多少行
+	        contextMenu:true,//显示表头下拉菜单
+	        fixedRowsTop:1,
+	        
+	        manualColumnResize:true, //允许拖曳列表头，默认为false
+	        manualRowResize:true, //允许拖曳行表头，默认为false
+	        columnSorting:true,
+	        autoColumnSize:true
+		});
+		
+		
+		var data2 = [
+			  //表头
+			  ['XXXXX报表','','','','',''],
+			  ['日期', '人口', '', '', '本年实际',''],
+			  ['', '', '城镇人口', '', '本月','上月'],
+			  ['', '', '男', '女', '',''],
+			  
+			  //数据
+              ['2017-01', 1223, 231, '3399', 530,112],
+              ['2017-01', '天津', '空调', '4299', 522],
+              ['2017-01', '上海', '洗衣机', '1299', 544],
+              ['2017-01', '广州', '彩电', '4599', 562],
+              ['2017-01', '深圳', '热水器', '1099', 430],
+              ['2017-02', '重庆', '笔记本电脑', '4999', 666],
+              ['2017-02', '厦门', '油烟机', '2899', 438],
+              ['2017-02', '青岛', '饮水机', '899', 620],
+              ['2017-02', , '手机', '1999', 500, 999]
+          ];
+
+          var hot2 = new Handsontable(document.getElementById('example2'),{
+              data: data2,
+  			  colHeaders: false,//显示纵向表头
+              rowHeaders: false,// 显示横向表头
+              editor: false, // 禁用所有单元格编辑
+              colWidths: 150, // 设置所有列宽为150像素
+              contextMenu: true, // 使用右键菜单
+              manualColumnResize:true, //允许拖曳列表头，默认为false
+  	          manualRowResize:true, //允许拖曳行表头，默认为false
+  	          minSpareRows:5,//空出多少行
+              mergeCells: [
+				  {row:0, col:0, rowspan:1, colspan:6},
+				  {row:1, col:0, rowspan:3, colspan:1},
+				  {row:1, col:1, rowspan:1, colspan:3},
+				  {row:2, col:1, rowspan:2, colspan:1},
+				  {row:2, col:2, rowspan:1, colspan:2},
+				  {row:1, col:4, rowspan:1, colspan:2},
+				  
+				  {row:2, col:4, rowspan:2, colspan:1},
+				  {row:2, col:5, rowspan:2, colspan:1},
+				  
+                  //{row:4, col:0, rowspan:5, colspan:1},
+                  //{row:9, col:0, rowspan:4, colspan:1}
+              ],
+              cell: [
+                  {row:0, col:0,className: "htCenter htMiddle"},
+                  {row:1, col:0,className: "htCenter htMiddle"},
+                  {row:1, col:1,className: "htCenter htMiddle"},
+                  
+                  {row:2, col:1,className: "complexhead"},
+                  
+                  {row:2, col:2,className: "htCenter htMiddle"},
+                  {row:3, col:2,className: "htCenter htMiddle"},
+                  {row:3, col:3,className: "htCenter htMiddle"},
+                  {row:1, col:4,className: "htCenter htMiddle"},
+                  {row:2, col:4,className: "htCenter htMiddle"},
+				  {row:2, col:5,className: "htCenter htMiddle"},
+                  
+                  
+                  //{row: 4, col: 0, className: "htCenter htMiddle"}, // 设置下标为0,0的单元格样式 水平居中、垂直居中
+                  //{row: 9, col: 0, className: "htCenter htMiddle"}
+              ]
+          });
+	}
+	
+</script>
+</html>

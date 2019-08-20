@@ -1,11 +1,4 @@
-package test;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +13,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+
 import song.Application;
 import song.engine.Checkes;
 import song.engine.CheckesService;
@@ -79,6 +73,22 @@ public class JSEngineTest {
         } catch (Exception ex) {
             ex.printStackTrace();
         }*/
+        String jsSt1r = "b$S6$";
+        try {
+            System.out.println(String.format("b$S6$'s value is %s", engineImpl.eval(jsSt1r).toString()));
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void test1() {
+        String jsStr = "b$S6$";
+        try {
+            System.out.println(String.format("b$S6$'s value is %s", engineImpl.eval(jsStr).toString()));
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
     }
 
     // @Test

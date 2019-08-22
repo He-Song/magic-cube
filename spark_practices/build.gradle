@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+}
+
+version 'unspecified'
+
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    springBootVersion = "2.0.4.RELEASE"
+    fasterxmlVersion = "2.9.6"
+    sparkVersion = "2.4.0"
+}
+dependencies {
+    //compile (group: 'org.springframework.boot', name: 'spring-boot-starter', version: "$springBootVersion")
+    //{exclude group:"org.springframework.boot", module: "spring-boot-starter-logging"}
+    compile (group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "$springBootVersion")
+    //{exclude group:"com.fasterxml.jackson.core", module: "jackson-databind"}
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: "$springBootVersion"
+
+    //spark
+    compile (group: 'org.apache.spark', name: 'spark-core_2.11', version: "$sparkVersion")
+            //{exclude group:"com.fasterxml.jackson.core", module: "jackson-databind"}
+            { exclude group:"slf4j-log4j12",module:"org.slf4j"}
+    compile group: 'org.apache.spark', name: 'spark-sql_2.11', version: "$sparkVersion"
+
+    //解决springboot与spark-core中jackson包的冲突
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: "$fasterxmlVersion"
+    //compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: "$fasterxmlVersion"
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: "$fasterxmlVersion"
+    compile group: 'com.fasterxml.jackson.module', name: 'jackson-module-scala_2.11', version: "$fasterxmlVersion"
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+
+    compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
+
+    // swagger
+    //compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+    //compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+}

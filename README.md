@@ -5,3 +5,6 @@ a newbie's way of learning
 
 ### springboot_Jpa_multiResources
 Jpa的多资源版本
+
+### spark_practices
+Spark 相关的一些RDD练习及本地测试

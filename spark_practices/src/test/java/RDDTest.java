@@ -17,13 +17,15 @@ public class RDDTest {
 
     JavaSparkContext sc;
 
-    @Test public void filter() {
+    @Test
+    public void filter() {
 
     }
 
-    @Test public void flatMap() {
+    @Test
+    public void flatMap() {
 
-        JavaRDD<String> lines = sc.parallelize(Arrays.asList("hello moto", "hello apple"));
+        JavaRDD<String> lines = sc.parallelize(Arrays.asList("hello moto", "hello apple", "hello huawei"));
 
         JavaRDD<String> words = lines.flatMap(s -> Arrays.asList(s.split(" ")).iterator());
 
@@ -31,12 +33,14 @@ public class RDDTest {
         sc.close();
     }
 
-    @Before public void start() {
+    @Before
+    public void start() {
         conf = new SparkConf().setAppName("countWords").setMaster("local");
         sc = new JavaSparkContext(conf);
     }
 
-    @After public void end() {
+    @After
+    public void end() {
         sc.close();
     }
 
